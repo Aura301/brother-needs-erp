@@ -1,0 +1,401 @@
+:root {
+  --bg: #F5F7F1;
+  --surface: #FFFFFF;
+  --sidebar: #0B4602;
+  --sidebar-soft: #1B5A12;
+  --sidebar-text: #CFE0BE;
+  --primary: #72943D;
+  --primary-dark: #0B4602;
+  --lime: #AFD041;
+  --accent-soft: #EAF1DC;
+  --text: #1A1E15;
+  --muted: #6E7565;
+  --border: #E2E6D8;
+  --danger: #C0473A;
+  --danger-soft: #F7E1DE;
+  --ok: #3E6B22;
+  --ok-soft: #E4EFD8;
+  --input-bg: #FFFFFF;
+  --shadow: 0 1px 2px rgba(0,0,0,0.04);
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  --font-mono: 'SFMono-Regular', Menlo, Consolas, 'Courier New', monospace;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: var(--font-body); font-size: 14px;
+}
+a { color: inherit; text-decoration: none; }
+
+.layout { display: flex; min-height: 100vh; }
+
+/* ---------- SIDEBAR ---------- */
+.sidebar {
+  width: 232px; background: var(--sidebar); color: var(--sidebar-text);
+  display: flex; flex-direction: column; flex-shrink: 0;
+}
+.sidebar-brand { padding: 22px 20px 16px; display: flex; align-items: center; gap: 10px; }
+.sidebar-brand img { width: 38px; height: 38px; object-fit: contain; background: #fff; border-radius: 9px; padding: 4px; }
+.sidebar-brand .name { font-family: var(--font-display); font-size: 16.5px; font-weight: 700; color: #fff; line-height: 1.1; }
+.sidebar-brand .sub { font-size: 10.5px; color: #9FC17E; }
+.sidebar nav { margin-top: 8px; padding: 0 12px; display: flex; flex-direction: column; gap: 2px; }
+.sidebar nav a {
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+  border-radius: 9px; font-size: 13.5px; font-weight: 500; color: var(--sidebar-text);
+}
+.sidebar nav a.active { background: var(--sidebar-soft); color: #fff; font-weight: 700; }
+.sidebar nav a:hover { background: var(--sidebar-soft); color: #fff; }
+.sidebar-foot { margin-top: auto; padding: 16px; font-size: 10.5px; color: #5F7A64; }
+
+/* ---------- THEME TOGGLE BUTTON ---------- */
+.theme-toggle {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  width: 100%; padding: 9px 0; margin-bottom: 8px; border-radius: 9px;
+  background: var(--sidebar-soft); color: #fff; border: none; cursor: pointer;
+  font-size: 12.5px; font-weight: 600; font-family: var(--font-body);
+}
+.theme-toggle:hover { filter: brightness(1.15); }
+.theme-icon-dark { display: none; }
+
+/* ---------- MOBILE TOPBAR & DRAWER (disembunyikan di desktop, lihat @media di bawah) ---------- */
+.mobile-topbar { display: none; }
+.sidebar-overlay { display: none; }
+.sidebar-close { display: none; }
+
+/* ---------- MAIN ---------- */
+main.content { flex: 1; min-width: 0; padding: 26px 32px 60px; }
+.page-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 22px; flex-wrap: wrap; gap: 10px; }
+.page-title { font-family: var(--font-display); font-size: 25px; font-weight: 700; }
+.page-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+/* ---------- CARD ---------- */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; }
+.card-pad { padding: 20px; }
+
+/* ---------- STAT GRID ---------- */
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
+.stat-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
+.stat-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; font-size: 15px; }
+.stat-icon.ok { background: var(--ok-soft); color: var(--ok); }
+.stat-icon.danger { background: var(--danger-soft); color: var(--danger); }
+.stat-icon.accent { background: var(--accent-soft); color: var(--primary); }
+.stat-label { font-size: 11.5px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+.stat-value { font-family: var(--font-mono); font-size: 19px; font-weight: 700; margin-top: 4px; }
+
+/* ---------- BUTTONS ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px; padding: 9px 14px; border-radius: 9px;
+  font-size: 13.5px; font-weight: 600; cursor: pointer; border: 1px solid transparent;
+  font-family: var(--font-body); background: none;
+}
+.btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+.btn-accent { background: var(--primary); color: #fff; border-color: var(--primary); }
+.btn-ghost { background: transparent; color: var(--text); border-color: var(--border); }
+.btn-subtle { background: var(--bg); color: var(--text); border-color: var(--border); }
+.btn-danger { background: var(--danger-soft); color: var(--danger); border-color: var(--danger-soft); }
+.btn:hover { filter: brightness(.95); }
+.btn-sm { padding: 5px 9px; font-size: 12px; }
+
+/* ---------- FORM ---------- */
+label.field-label { display: block; font-size: 11.5px; font-weight: 700; color: var(--muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: .04em; }
+input[type=text], input[type=number], input[type=date], input[type=search], select, textarea {
+  width: 100%; padding: 9px 11px; border-radius: 8px; border: 1px solid var(--border);
+  font-size: 13.5px; font-family: var(--font-body); background: var(--input-bg); color: var(--text);
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); outline-offset: -1px; }
+.form-row { display: grid; gap: 10px; margin-bottom: 12px; }
+.grid-2 { grid-template-columns: 1fr 1fr; }
+.grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+/* ---------- TABLE ---------- */
+table.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.data-table thead tr { background: var(--bg); text-align: left; }
+table.data-table th { padding: 10px 16px; font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+table.data-table td { padding: 10px 16px; border-top: 1px solid var(--border); }
+table.data-table tbody tr:hover { background: #FAFBF7; }
+
+/* ---------- BADGE ---------- */
+.badge { font-size: 11.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px; display: inline-block; }
+.badge-ok { background: var(--ok-soft); color: var(--ok); }
+.badge-danger { background: var(--danger-soft); color: var(--danger); }
+.badge-muted { background: var(--bg); color: var(--muted); }
+
+/* ---------- ALERT ---------- */
+.alert { border-radius: 10px; padding: 10px 14px; font-size: 12.5px; margin-bottom: 16px; border: 1px solid var(--border); }
+.alert-info { background: var(--accent-soft); }
+.alert-ok { background: var(--ok-soft); color: var(--ok); }
+.alert-danger { background: var(--danger-soft); color: var(--danger); }
+
+/* ---------- EMPTY STATE ---------- */
+.empty-state { text-align: center; padding: 48px 20px; color: var(--muted); }
+.empty-state .icon { font-size: 30px; opacity: .5; margin-bottom: 10px; }
+.empty-state .title { font-weight: 700; color: var(--text); margin-bottom: 4px; }
+
+/* ---------- CART (order.php) ---------- */
+.cart-item { border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 10px; }
+.cart-item .row1 { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.cart-item .row2 { display: flex; gap: 8px; align-items: center; }
+.cart-item input[type=number] { width: 62px; padding: 6px 7px; }
+.search-results { max-height: 260px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; }
+.search-results .item { display: flex; justify-content: space-between; padding: 9px 12px; cursor: pointer; font-size: 13.5px; border-bottom: 1px solid var(--border); }
+.search-results .item:hover { background: var(--bg); }
+
+/* ---------- INVOICE ---------- */
+.invoice-card { max-width: 640px; margin: 0 auto; overflow: hidden; }
+.invoice-header { background: var(--sidebar); padding: 22px 28px; display: flex; justify-content: space-between; align-items: center; }
+.invoice-header.invoice-header-centered { flex-direction: column; justify-content: center; text-align: center; gap: 6px; padding: 26px 28px; }
+.invoice-header .logo-box { background: #fff; border-radius: 8px; padding: 6px 12px; display: flex; align-items: center; }
+.invoice-header-centered .logo-box { padding: 8px 16px; margin-bottom: 2px; }
+.invoice-header .logo-box img { height: 30px; object-fit: contain; }
+.invoice-header-centered .logo-box img { height: 40px; }
+.invoice-header .legal-name { color: #fff; font-weight: 700; font-size: 13px; letter-spacing: .02em; }
+.invoice-header-centered .legal-name { font-size: 15px; }
+.invoice-header .legal-address { color: var(--sidebar-text); font-size: 11px; max-width: 380px; line-height: 1.5; }
+.invoice-body { padding: 26px 28px 8px; }
+.invoice-title { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--primary); line-height: 1; }
+table.invoice-table { width: 100%; border-collapse: separate; border-spacing: 0 4px; font-size: 12.5px; margin-bottom: 4px; }
+table.invoice-table th { background: var(--primary); color: #fff; padding: 8px 10px; font-size: 10.5px; font-weight: 700; }
+table.invoice-table td { padding: 8px 10px; background: var(--bg); }
+.invoice-total-badge { display: flex; justify-content: space-between; font-size: 14.5px; font-weight: 700; padding: 10px 14px; background: var(--primary); color: #fff; border-radius: 999px; margin-top: 4px; }
+.invoice-footer { background: var(--sidebar); color: #fff; padding: 12px 28px; display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; }
+.signature-img { height: 70px; object-fit: contain; }
+
+/* Invoice pakai font Poppins (di-load khusus di invoice.php), gantiin font
+   default & font angka bawaan aplikasi - !important biar ngalahin inline style
+   font-family yang ada di beberapa elemen invoice. */
+#invoice-print, #invoice-print * {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif !important;
+}
+
+@media print {
+  body { background: #fff !important; }
+  .sidebar, .sidebar-overlay, .mobile-topbar, .no-print { display: none !important; }
+  .layout { display: block !important; }
+  main.content { width: 100% !important; margin: 0 !important; padding: 0 !important; }
+  /* Dulu ini hardcode "main.content > *:not(#invoice-print)", jadi CUMA invoice
+     yang dikecualiin - begitu ada halaman lain yang nambahin section print-nya
+     sendiri (misal #laporan-print di Laporan Harian), section itu ikut ketiban
+     "display:none" dari aturan ini (soalnya bukan #invoice-print) dan gak ada
+     yang nimpa balik -> keprint/ke-PDF-in kosong total walau datanya ada.
+     Sekarang pake class generik ".print-section" biar section print MANAPUN
+     (invoice, laporan harian, dan yang nanti-nanti ditambahin) otomatis
+     dikecualiin dari sembunyi-semua ini, bukan cuma invoice doang. */
+  main.content > *:not(.print-section) { display: none !important; }
+  .print-section { position: static; width: 100%; display: block !important; }
+
+  /* Biar 1 baris item gak kepotong di tengah pas ganti halaman, dan bagian
+     pembayaran/tanda tangan tetep nyatu (gak misah dari isinya). */
+  table.invoice-table tr { page-break-inside: avoid; }
+  .invoice-footer, .invoice-signature { page-break-inside: avoid; }
+  .no-print { display: none !important; }
+
+  /* Browser default-nya buang semua warna background pas print (hemat tinta).
+     Ini maksa browser tetap ngeprint background hijau/warna badge dll. */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Kurangin margin kertas & rapetin spacing biar invoice muat 1 halaman
+     walau item-nya banyak, dan gak ada bagian yang kepotong di tengah. */
+  @page { margin: 8mm; }
+
+  .invoice-card { max-width: 100%; border: none; }
+
+  /* Kalau item order dikit (<=10), invoice-nya jangan nge-gantung di tengah halaman
+     dengan sisa putih kosong - stretch penuh 1 halaman, footer nempel di bawah.
+     Class .invoice-fill-page cuma dipasang server-side kalau item-nya sedikit,
+     biar order panjang (yang butuh lanjut ke halaman berikutnya) gak kena efek
+     flex ini - soalnya flex+pagination browser gampang rusak buat konten panjang. */
+  /* Kalau item order dikit (<=10), invoice-nya jangan nge-gantung di tengah halaman
+     dengan sisa putih kosong - stretch penuh 1 halaman, footer nempel di bawah.
+     Class .invoice-fill-page cuma dipasang server-side kalau item-nya sedikit,
+     biar order panjang (yang butuh lanjut ke halaman berikutnya) gak kena efek
+     flex ini - soalnya flex+pagination browser gampang rusak buat konten panjang.
+     CATATAN: Safari (Mac) punya bug lama soal flexbox+min-height pas nge-print,
+     bisa bikin invoice jadi manjang aneh gak keruan. Makanya di sini dipaksa
+     balik ke block biasa - gak se-cantik (footer gak nempel pas di bawah buat
+     invoice pendek), tapi AMAN dan konsisten di semua browser (Chrome/Safari/Edge). */
+  .invoice-fill-page { display: block; min-height: 0; }
+  .invoice-fill-page .invoice-body { display: block; }
+  .invoice-fill-page .invoice-body table.invoice-table + div { margin-top: 0; }
+  .invoice-header-centered { padding: 12px 20px 10px; }
+  .invoice-header-centered .logo-box img { height: 30px; }
+  .invoice-header-centered .legal-name { font-size: 13px; }
+  .invoice-header .legal-address { font-size: 9.5px; }
+  .invoice-body { padding: 12px 20px 4px; }
+  table.invoice-table th, table.invoice-table td { padding: 5px 8px; font-size: 11px; }
+  .invoice-total-badge { padding: 6px 12px; font-size: 12.5px; }
+  .invoice-footer { padding: 8px 20px; }
+
+  /* Jangan biarin 1 baris tabel, atau header/footer, kepotong jadi 2 halaman */
+  table.invoice-table tr,
+  .invoice-header,
+  .invoice-footer,
+  .signature-img { page-break-inside: avoid; break-inside: avoid; }
+}
+
+/* =========================================================
+   DARK MODE
+   Ditaruh di PALING BAWAH file secara sengaja, supaya urutan
+   CSS-nya gak akan ketiban aturan lain di atasnya.
+   ========================================================= */
+[data-theme="dark"] {
+  --bg: #10140F !important;
+  --surface: #1A2016 !important;
+  --sidebar: #060D04 !important;
+  --sidebar-soft: #142A0D !important;
+  --sidebar-text: #A9C49A !important;
+  --primary: #7FAE45 !important;
+  --primary-dark: #0B4602 !important;
+  --lime: #C3E066 !important;
+  --accent-soft: #1E2A16 !important;
+  --text: #E7ECE1 !important;
+  --muted: #8B9482 !important;
+  --border: #2A3323 !important;
+  --danger: #E27A6C !important;
+  --danger-soft: #3A2320 !important;
+  --ok: #8FC168 !important;
+  --ok-soft: #1C2E17 !important;
+  --input-bg: #171D13 !important;
+  --shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
+}
+[data-theme="dark"] table.data-table tbody tr:hover { background: #202718 !important; }
+[data-theme="dark"] .search-results .item:hover { background: var(--accent-soft) !important; }
+[data-theme="dark"] .stat-icon.ok,
+[data-theme="dark"] .stat-icon.danger,
+[data-theme="dark"] .stat-icon.accent { filter: brightness(1.15); }
+[data-theme="dark"] .theme-icon-light { display: none !important; }
+[data-theme="dark"] .theme-icon-dark { display: inline !important; }
+
+/* Invoice itu dokumen resmi buat customer - jangan ikut tema apapun yang
+   lagi aktif di aplikasinya (termasuk Halloween). Ini nimpa balik semua
+   variabel warna ke versi terang normal, cuma di dalam #invoice-print doang,
+   TANPA syarat tema apapun - selalu berlaku. */
+#invoice-print {
+  --bg: #F5F7F1;
+  --surface: #FFFFFF;
+  --sidebar: #0B4602;
+  --sidebar-soft: #1B5A12;
+  --sidebar-text: #CFE0BE;
+  --primary: #72943D;
+  --primary-dark: #0B4602;
+  --lime: #AFD041;
+  --accent-soft: #EAF1DC;
+  --text: #1A1E15;
+  --muted: #6E7565;
+  --border: #E2E6D8;
+  --danger: #C0473A;
+  --danger-soft: #F7E1DE;
+  --ok: #3E6B22;
+  --ok-soft: #E4EFD8;
+  --input-bg: #FFFFFF;
+  color: var(--text);
+}
+#invoice-print * {
+  color: inherit;
+}
+#invoice-print .invoice-header,
+#invoice-print .invoice-footer {
+  color: #fff;
+}
+#invoice-print .invoice-header *,
+#invoice-print .invoice-footer * {
+  color: inherit;
+}
+#invoice-print .invoice-title { color: var(--primary) !important; }
+#invoice-print table.invoice-table th { color: #fff !important; }
+#invoice-print .invoice-total-badge { color: #fff !important; }
+#invoice-print .invoice-total-badge * { color: #fff !important; }
+
+/* Laporan Harian - sama kayak invoice di atas: pas di-print/Simpan PDF harus
+   SELALU kebaca jelas (teks gelap di atas putih), apapun tema yang lagi aktif
+   (termasuk Dark Mode). Tanpa ini, pas Dark Mode nyala teksnya ikut jadi warna
+   terang (var(--text) versi dark = hampir putih) sementara kertas tetap putih,
+   jadi keliatan kosong/putih semua pas di-print atau disimpan ke PDF. */
+#laporan-print {
+  --bg: #F5F7F1;
+  --surface: #FFFFFF;
+  --text: #1A1E15;
+  --muted: #6E7565;
+  --border: #E2E6D8;
+  --primary: #72943D;
+  --danger: #C0473A;
+  --danger-soft: #F7E1DE;
+  --ok: #3E6B22;
+  --ok-soft: #E4EFD8;
+  --input-bg: #FFFFFF;
+  background: #FFFFFF;
+  color: var(--text);
+}
+
+/* =========================================================
+   RESPONSIVE — HP & TABLET
+   Ditaruh PALING BAWAH juga, dan pakai !important di bagian
+   penting, biar gak ketiban aturan manapun di atasnya.
+   ========================================================= */
+@media (max-width: 900px) {
+  main.content { padding: 20px 16px 40px !important; }
+  .page-header { flex-direction: column !important; align-items: flex-start !important; }
+  .page-title { font-size: 21px !important; }
+
+  /* Tabel data lebar (Produk, Stock, SPPG, Riwayat, Keuangan, dll) - biar bisa
+     di-scroll ke samping di HP, bukan kepotong/ilang kayak sebelumnya. */
+  .card:has(> table.data-table),
+  .card:has(> div > table.data-table) {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  table.data-table { min-width: 640px; }
+
+  /* Baris tombol/toolbar (Cari, Import, Export, Tambah, dll) - biar turun ke
+     baris baru di HP, bukan numpuk/kepotong di 1 baris. */
+  form[style*="display:flex"],
+  div[style*="display:flex"] {
+    flex-wrap: wrap !important;
+  }
+
+  .mobile-topbar {
+    display: flex !important; align-items: center !important; justify-content: space-between !important;
+    background: var(--sidebar); color: #fff; padding: 14px 16px; position: sticky; top: 0; z-index: 30;
+  }
+  .mobile-topbar img { height: 30px !important; width: auto !important; object-fit: contain; }
+  .mobile-topbar button {
+    background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; padding: 4px 8px; line-height: 1;
+  }
+
+  .layout { flex-direction: column !important; }
+  .sidebar {
+    position: fixed !important; top: 0 !important; left: 0 !important; height: 100% !important; z-index: 50 !important;
+    transform: translateX(-100%) !important; transition: transform .2s ease; width: 78vw !important; max-width: 280px !important;
+  }
+  .sidebar.open { transform: translateX(0) !important; }
+  .sidebar-close {
+    display: block !important; position: absolute; top: 14px; right: 14px; background: none; border: none;
+    color: #fff; font-size: 22px; cursor: pointer;
+  }
+  .sidebar-overlay.open {
+    display: block !important; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 40;
+  }
+
+  /* Grid layout kebanyakan ditulis inline (style="grid-template-columns:...") di tiap
+     halaman - dipaksa jadi 1 kolom di layar kecil lewat selector attribute, gak perlu
+     edit tiap file satu-satu. */
+  [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+  .stat-grid, .stat-grid.cols-3 { grid-template-columns: 1fr 1fr !important; }
+
+  .card[style*="overflow:hidden"] { overflow-x: auto !important; }
+  table.data-table { min-width: 560px; }
+
+  .invoice-header, .invoice-body, .invoice-footer { padding-left: 16px !important; padding-right: 16px !important; }
+}
+
+@media (max-width: 480px) {
+  .stat-grid, .stat-grid.cols-3 { grid-template-columns: 1fr !important; }
+  .page-title { font-size: 19px !important; }
+  .btn { padding: 8px 12px !important; font-size: 13px !important; }
+}
