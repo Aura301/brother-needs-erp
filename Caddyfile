@@ -1,0 +1,16 @@
+{
+    frankenphp
+    auto_https off
+}
+
+:{$PORT} {
+    root * /app
+    php_server
+    file_server
+    
+    @phpfiles {
+        path *.php
+    }
+    
+    rewrite /index.php {path}
+}
